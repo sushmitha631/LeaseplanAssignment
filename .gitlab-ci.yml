@@ -1,0 +1,24 @@
+image: maven:3.8.4-jdk-8
+
+stages:
+    - build
+    
+compile:
+  stage: build
+  script:
+    - 'mvn compile'
+test:
+  stage: test
+  script:
+    - "echo before running tests"
+    - 'mvn clean verify'
+    - "after tests are run"
+    
+artifacts:
+  when: always
+  paths:
+     - target/site/serenity/
+    reports:
+      junit: target/site/serenity/index.html
+      
+
